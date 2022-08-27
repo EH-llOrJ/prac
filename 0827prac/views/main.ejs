@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <input type="text" id="id" />
+    <input type="text" id="pw" />
+    <button onclick="clickbtn()">회원가입</button>
+    <br />
+    <input type="text" id="id1" />
+    <input type="text" id="pw1" />
+    <button onclick="loginbtn()">로그인</button>
+  </body>
+  <script>
+    function clickbtn() {
+      console.log("버튼 눌림");
+      let id = $("#id").val();
+      let pw = $("#pw").val();
+      $.ajax({
+        url: "/signup",
+        type: "POST",
+        data: {
+          id: id,
+          pw: pw,
+        },
+        success: function (data) {
+          if (data == "suc") alert("회원가입 성공");
+        },
+      });
+    }
+    function loginbtn() {
+      console.log("로그인 버튼 눌림");
+      let id = $("#id1").val();
+      let pw = $("#pw1").val();
+      $.ajax({
+        url: "/login",
+        type: "POST",
+        data: {
+          id: id,
+          pw: pw,
+        },
+        success: function (data) {
+          if (data == "suc") alert("로그인 성공");
+          else if (data == "fail") alert("id pw 확인하세요");
+        },
+      });
+    }
+  </script>
+</html>
